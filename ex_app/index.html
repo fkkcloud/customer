@@ -12,6 +12,7 @@
     </style>
 
     <script src="./js/phaser.js"></script>
+    <script src="./js/phaser-compat-2.4.js"></script>
     <script src="./js/EZGUI.js"></script>
     <script src="./item-data.js"></script>
 	<script src="./app-gui.js"></script>
@@ -31,6 +32,10 @@
             for (var i in EZGUI.components){
                 //console.log(i);
             }
+
+            console.log(EZGUI.components.listQuest, EZGUI.components.listQuest.container);
+            //EZGUI.components.listQuest.container.height += 10.5;
+            //EZGUI.components.listQuest.container.scale.y -= 0.5;
             
             EZGUI.components.listQuestBtn1.on('click', function (){
                 var item1 = listQuestJSON.data[0];
