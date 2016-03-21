@@ -16,15 +16,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="lib/phaser/phaser.js"></script>
 
+    <script src="js/globals.js"></script>
+
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
 
   </head>
 
-  <body ng-app="game.main">
+  <body ng-app="game.main" ng-controller="MainCtrl">
     <script type="text/javascript">
-      var game = new Phaser.Game(window.innerWidth, window.innerHeight * 0.3, Phaser.AUTO, 'game', { preload: preload, create: create });
+      var game = new Phaser.Game(window.innerWidth, window.innerHeight * 0.31, Phaser.AUTO, 'game', { preload: preload, create: create });
 
       function preload() {
               game.load.image('gameScreen', './assets/gamescreen.png');
@@ -40,8 +42,8 @@
       </ion-nav-back-button>
     </ion-nav-bar>
     
-    <div class="test" id="game"></div>
-    <ion-nav-view class="test2"></ion-nav-view>
+    <div class="stack-game" id="game"></div>
+    <ion-nav-view class="stack-list"></ion-nav-view>
 
   </body>
 

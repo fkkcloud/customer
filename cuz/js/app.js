@@ -26,37 +26,57 @@ angular.module('game.main',
       templateUrl: "templates/tabs.html"
     })
 
-    .state('tab.dash', {
-      url: '/dash',
+    .state('tab.quest', {
+      url: '/quest',
       views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
+        'tab-quest': {
+          templateUrl: 'templates/tab-quest.html',
+          controller: 'QuestCtrl'
         }
       }
     })
 
-    .state('tab.config', {
-      url: '/config',
+    .state('tab.belt', {
+      url: '/belt',
       views: {
-        'tab-config': {
-          templateUrl: 'templates/tab-config.html',
-          controller: 'ConfigCtrl'
+        'tab-belt': {
+          templateUrl: 'templates/tab-belt.html',
+          controller: 'BeltCtrl'
         }
       }
     })
 
-    .state('tab.about', {
-      url: '/about',
+    .state('tab.item', {
+      url: '/item',
       views: {
-        'tab-about': {
-          templateUrl: 'templates/tab-about.html',
-          controller: 'AboutCtrl'
+        'tab-item': {
+          templateUrl: 'templates/tab-item.html',
+          controller: 'ItemCtrl'
         }
       }
     })
 
-  $urlRouterProvider.otherwise('/tab/config');
+    .state('tab.gf', {
+      url: '/gf',
+      views: {
+        'tab-gf': {
+          templateUrl: 'templates/tab-gf.html',
+          controller: 'GFCtrl'
+        }
+      }
+    })
+
+    .state('tab.store', {
+      url: '/store',
+      views: {
+        'tab-store': {
+          templateUrl: 'templates/tab-store.html',
+          controller: 'StoreCtrl'
+        }
+      }
+    })
+
+  $urlRouterProvider.otherwise('/tab/quest');
 
 });
 

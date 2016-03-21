@@ -1,9 +1,21 @@
 
+/* main */
+
 .bg{
   background-color:#333333!important;
 }
 
-.test{
+.ion-item{
+  padding: 0px !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  border-width: 0px !important;
+  border-style: none !important;
+}
+
+.stack-game{
   position:absolute;
   top:0;
   width:100%;
@@ -12,10 +24,81 @@
   max-width: 720px;
 }
 
-.test2{
+.stack-list{
   position:absolute;
   top:30%;
   height:70%;
   max-width: 720px;
+}
 
+/* stacks in list */
+.label-item {
+  position:absolute;
+  width:60px;
+  height:30px;
+  top:15px;
+  left:70px; 
+}
+.stack-list-item {
+  width:100%;
+  height:70px !important;
+  background-color:#bbb;
+}
+.btn-upgrade {
+  position:absolute;
+  width:80px;
+  height:60px;
+  background-color:#666;
+  top:5px;
+  right:5px;
+}
+.btn-upgrade:active {
+  -webkit-transform: scale(1.08,1.08); /* Safari */
+  transform: scale(1.08,1.08);
+}
+
+.icon-item {
+  position:absolute;
+  width:60px;
+  height:60px;
+  background-color:#666;
+  top:5px;
+  left:5px;
+}
+.icon-item:active {
+  -webkit-transform: scale(1.08,1.08); /* Safari */
+  transform: scale(1.08,1.08);
+}
+
+
+.bar-progress{
+  position:absolute;
+  width:60%;
+  height:20px;
+  left:70px;
+  top:42px;
+  border:solid 1px #505050;
+  border-radius:1px;
+  overflow:hidden;
+  background: #f0f0f0;
+}
+
+.fill{
+  width:0%;
+  background:#ff744f;
+  border-radius:1px;
+  max-width:100%;
+  height:100%;
+}
+ .fill-activate{
+  animation: barFill infinite 2s linear;
+  -webkit-animation:barFill infinite 2s linear;
+}
+@keyframes barFill{
+  0%{width:0%;}
+  100%{width:100%;}
+}
+@-webkit-keyframes barFill{
+  0%{width:0%;}
+  100%{width:100%;} 
 }
