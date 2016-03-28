@@ -11,23 +11,17 @@ angular.module('game.controllers', [])
     LocalStorage --> GLOBALS --> to $scope (of Angular UI side) and to PhaserIO (for game side)
   */
   var updateDelta = 0.02;
+
   $scope.gameUITick = function(){
     for (var i = 0; i < GLOBALS.questItems.length; i++){ 
 
       var quest = GLOBALS.questItems[i];
 
-      if (quest.activated)
-      {
+      if (quest.activated) {
         quest.currentTime += updateDelta;
-        //if (i === 0) console.log('adding', quest.currentTime);
-        // if time maxes out, reset it! + call complete function
-
-        if (quest.currentTime >= quest.maxTime)
-        { 
+        if (quest.currentTime >= quest.maxTime) { 
           quest.currentTime = 0;
-
-          //if (i === 0) console.log('done!', quest.currentTime);
-          // potential call for complete callback function
+          $scope.gainMoneyFromQuest(quest);
         } 
       }
 
@@ -53,6 +47,26 @@ angular.module('game.controllers', [])
     $scope.wallet = GLOBALS.wallet;
   };
 
+  $scope.gainMoneyFromQuest = function(itemData){
+    if (itemData.reward.length === 0)
+      return; // free?
+
+    for (var i = 0; i < itemData.reward.length; i++){
+
+      var reward = itemData.reward[i];
+
+      if (reward.type == "KRW"){
+        GLOBALS.wallet.KRW += reward.amount;
+      }
+      else if (reward.type == "SPIRIT" && $scope.wallet.SPIRIT < reward.amount){
+        GLOBALS.wallet.SPIRIT += reward.amount;
+      }
+      else if (reward.type == "RUBY" && $scope.wallet.RUBY < reward.amount){
+        GLOBALS.wallet.RUBY += reward.amount;
+      }
+    }
+  }
+
   $scope.canBePurchased = function(itemData){
     if (itemData.price.length === 0)
       return false;
@@ -75,10 +89,31 @@ angular.module('game.controllers', [])
     return true;
   };
 
-  $scope.updateUIPurchaseButtons = function(){
-    var currentTabName = $state.current.name.split('.')[1];
-    var items;
+  $scope.doPurchase = function(itemData){
 
+    if (itemData.price.length === 0)
+      return; // free?
+
+    for (var i = 0; i < itemData.price.length; i++){
+
+      var price = itemData.price[i];
+
+      if (price.type == "KRW"){
+        GLOBALS.wallet.KRW -= price.amount;
+      }
+      else if (price.type == "SPIRIT" && $scope.wallet.SPIRIT < price.amount){
+        GLOBALS.wallet.SPIRIT -= price.amount;
+      }
+      else if (price.type == "RUBY" && $scope.wallet.RUBY < price.amount){
+        GLOBALS.wallet.RUBY -= price.amount;
+      }
+    }
+    
+  }
+
+  $scope.getCurrentTabItems = function(){
+    var items;
+    var currentTabName = $state.current.name.split('.')[1];
     if (currentTabName == "quest")
       items = $scope.questItems;
     else if (currentTabName == "belt")
@@ -89,6 +124,12 @@ angular.module('game.controllers', [])
       items = $scope.gfItems;
     else if (currentTabName == "store")
       items = $scope.storeItems;
+    return items;
+  };
+
+  $scope.updateUIPurchaseButtons = function(){
+    
+    var items = $scope.getCurrentTabItems();
 
     var btns = jQuery('.btn-upgrade');
 
@@ -105,7 +146,7 @@ angular.module('game.controllers', [])
   };
 
   $scope.upgrade = function(){
-
+    // 
   };
 
   // global time
@@ -139,14 +180,19 @@ angular.module('game.controllers', [])
 
   $scope.upgradeQuest = function($event, item){
 
+    if (!$scope.canBePurchased(item))
+      return;
+
     if (item.activated){
-      // do level up
+      $scope.doPurchase(item);
       return;
     }
 
     var el_stack_item = angular.element($event.currentTarget).parent().children().children('.bar-progress');
 
     $scope.animateBar(el_stack_item, item, false); // run animation from the start
+
+    $scope.doPurchase(item);
 
   }
 

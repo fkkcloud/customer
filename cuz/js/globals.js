@@ -28,7 +28,7 @@ GLOBALS.questItems = [
       maxTime: 3,
       activated: false,
       lvl: 0,
-      reward: [{type: 'KRW', amount: 200}],
+      reward: [{type: 'KRW', amount: 300}],
     },
     { 
       price: [{type:'KRW', amount:40000}],
@@ -38,7 +38,7 @@ GLOBALS.questItems = [
       maxTime: 4,
       activated: false,
       lvl: 0,
-      reward: [{type: 'KRW', amount: 400}],
+      reward: [{type: 'KRW', amount: 700}],
     },
     { 
       price: [{type:'KRW', amount:160000}],
