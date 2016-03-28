@@ -25,6 +25,7 @@ body {
   top:0;
   width:100%;
   height:200px;
+  max-width:460px !important;
   z-index: 1;
 }
 
@@ -32,6 +33,7 @@ body {
   position:absolute;
   top:200px;
   height:calc(100% - 200px);
+  max-width:460px !important;
 }
 
 /* stacks in list */
