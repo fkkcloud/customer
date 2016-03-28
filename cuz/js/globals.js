@@ -1,5 +1,13 @@
 var GLOBALS = {};
 
+// WALLET  ------------------------------------------------------------------------------------------------------------------------
+GLOBALS.wallet = {
+	KRW:100000,
+	SPIRIT:100000,
+	//{type:'', amount:100000},
+};
+
+
 // QUEST  ------------------------------------------------------------------------------------------------------------------------
 GLOBALS.questItems = [
     { 
@@ -47,7 +55,7 @@ GLOBALS.questItems = [
 // BELT  ------------------------------------------------------------------------------------------------------------------------
 GLOBALS.beltItems = [
     { 
-      price: [{type:'SPT', amount:10}],
+      price: [{type:'SPIRIT', amount:10}],
       name: 'white',
       money: 10,
       activated: false,
@@ -55,7 +63,7 @@ GLOBALS.beltItems = [
       reward: [{type: 'Str', amount: 100}, {type: 'Agl', amount: 200}],
     },
     { 
-      price: [{type:'SPT', amount:20}],
+      price: [{type:'SPIRIT', amount:20}],
       name: 'yellow',
       money: 20,
       activated: false,
@@ -63,7 +71,7 @@ GLOBALS.beltItems = [
       reward: [{type: 'KRW', amount: 100}],
     },
     { 
-      price: [{type:'SPT', amount:40}],
+      price: [{type:'SPIRIT', amount:40}],
       name: 'blue',
       money: 30,
       activated: false,
@@ -71,7 +79,7 @@ GLOBALS.beltItems = [
       reward: [{type: 'KRW', amount: 100}],
     },
     { 
-      price: [{type:'SPT', amount:160}],
+      price: [{type:'SPIRIT', amount:160}],
       name: 'red',
       money: 40,
       activated: false,

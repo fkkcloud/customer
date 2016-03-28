@@ -32,7 +32,12 @@ angular.module('game.controllers', [])
       }
 
     }
+
     $scope.itemsUpdate();
+
+    $scope.walletUpdate();
+
+    $scope.updateUIPurchaseButtons();
   };
 
   // update to angular
@@ -48,8 +53,55 @@ angular.module('game.controllers', [])
     $scope.wallet = GLOBALS.wallet;
   };
 
-  $scope.canBePurchased = function(){
-    if ()
+  $scope.canBePurchased = function(itemData){
+    if (itemData.price.length === 0)
+      return false;
+
+    for (var i = 0; i < itemData.price.length; i++){
+
+      var price = itemData.price[i];
+
+      if (price.type == "KRW" && $scope.wallet.KRW < price.amount){
+        return false;
+      }
+      else if (price.type == "SPIRIT" && $scope.wallet.SPIRIT < price.amount){
+        return false;
+      }
+      else if (price.type == "RUBY" && $scope.wallet.RUBY < price.amount){
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  $scope.updateUIPurchaseButtons = function(){
+    var currentTabName = $state.current.name.split('.')[1];
+    var items;
+
+    if (currentTabName == "quest")
+      items = $scope.questItems;
+    else if (currentTabName == "belt")
+      items = $scope.beltItems;
+    else if (currentTabName == "item")
+      items = $scope.itemItems;
+    else if (currentTabName == "gf")
+      items = $scope.gfItems;
+    else if (currentTabName == "store")
+      items = $scope.storeItems;
+
+    var btns = jQuery('.btn-upgrade');
+
+    btns.each(function(index){
+      var itemData = items[index];
+
+      var elem = jQuery(this);
+
+      if ($scope.canBePurchased(itemData))
+        elem.css('background-color', '#0f0');
+      else
+        elem.css('background-color', '#f00');
+    });
   };
 
   $scope.upgrade = function(){
@@ -76,7 +128,7 @@ angular.module('game.controllers', [])
     elem.css('animation-duration', duration);
 
     if (resumeAnimation == true){
-      var duration_delay = "-" + item.currentTime + "s";
+      var duration_delay = '-' + item.currentTime + 's';
       elem.css('-webkit-animation-delay', duration_delay);
       elem.css('animation-delay', duration_delay);
     }
@@ -111,10 +163,13 @@ angular.module('game.controllers', [])
       if (itemData.activated)
         $scope.animateBar(elem_bar, itemData, true); //  run animation from where it left
     });
+
   };
 
   // do restore
-  $timeout(function(){$scope.restoreQuestBarAnimation();}, 140);
+  $timeout(function(){
+    $scope.restoreQuestBarAnimation();
+  }q);
 
 })
 
