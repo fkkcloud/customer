@@ -169,7 +169,7 @@ angular.module('game.controllers', [])
   // do restore
   $timeout(function(){
     $scope.restoreQuestBarAnimation();
-  }q);
+  });
 
 })
 
